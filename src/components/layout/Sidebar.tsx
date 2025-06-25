@@ -50,7 +50,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-0 z-50 h-full w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-200 ease-in-out md:relative md:translate-x-0",
+          "fixed left-0 top-0 z-50 h-full w-64 glass-sidebar border-r border-white/10 dark:border-white/5 transform transition-transform duration-300 ease-out md:relative md:translate-x-0",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -83,10 +83,10 @@ export function Sidebar() {
                   key={item.id}
                   onClick={() => handleViewChange(item.id as any)}
                   className={cn(
-                    "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover-lift",
                     isActive
-                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
-                      : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                      ? "bg-black/5 dark:bg-white/10 text-black dark:text-white backdrop-blur-sm"
+                      : "text-neutral-700 hover:bg-black/[0.03] dark:text-neutral-300 dark:hover:bg-white/[0.04]"
                   )}
                 >
                   <div className="flex items-center space-x-3">

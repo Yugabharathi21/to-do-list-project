@@ -108,6 +108,62 @@ export function TaskList() {
     }
   };
 
+  const handleToggleSubtask = async (taskId: string, subtaskIndex: number, completed: boolean) => {
+    try {
+      // Find the current task
+      const task = tasks.find(t => t._id === taskId);
+      if (!task) return;
+
+      // Create a copy of the subtasks array
+      const updatedSubtasks = [...task.subtasks];
+      
+      // Update the specific subtask
+      updatedSubtasks[subtaskIndex] = {
+        ...updatedSubtasks[subtaskIndex],
+        completed
+      };
+
+      // Calculate new completion percentage
+      const completedSubtasks = updatedSubtasks.filter(s => s.completed).length;
+      const completionPercentage = updatedSubtasks.length > 0 
+        ? Math.round((completedSubtasks / updatedSubtasks.length) * 100) 
+        : 0;
+
+      // If all subtasks are completed, mark the task as completed as well
+      let updatedStatus = task.status;
+      if (completedSubtasks === updatedSubtasks.length && completedSubtasks > 0) {
+        updatedStatus = 'completed';
+      } else if (task.status === 'completed' && completedSubtasks < updatedSubtasks.length) {
+        updatedStatus = 'in-progress';
+      }
+
+      // Make API call to update the task
+      const response = await tasksAPI.updateTask(taskId, {
+        subtasks: updatedSubtasks,
+        status: updatedStatus
+      });
+
+      // Update the task in local state
+      updateTask(taskId, response.data.task);
+      
+      // Show appropriate toast message
+      if (completed) {
+        toast.success('Subtask completed!', { duration: 1500 });
+      }
+      
+      // If all subtasks are completed and task status changed to completed
+      if (updatedStatus === 'completed' && task.status !== 'completed') {
+        toast.success('All subtasks completed! Task marked as complete.', { 
+          duration: 3000,
+          icon: '🎉'
+        });
+      }
+    } catch (error) {
+      console.error('Failed to update subtask:', error);
+      toast.error('Failed to update subtask');
+    }
+  };
+
   const handleDragEnd = async (result: any) => {
     if (!result.destination) return;
 
@@ -140,18 +196,18 @@ export function TaskList() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-gray-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-neutral-700 dark:text-neutral-300" />
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between panel-transition-in">
+        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neutral-800 to-neutral-600 dark:from-white dark:to-neutral-300">
           Tasks
         </h2>
-        <Button onClick={() => setIsCreateModalOpen(true)}>
+        <Button onClick={() => setIsCreateModalOpen(true)} className="hover-lift">
           <Plus className="mr-2 h-4 w-4" />
           Add Task
         </Button>
@@ -160,11 +216,11 @@ export function TaskList() {
       <TaskFilters />
 
       {tasks.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="text-gray-500 dark:text-gray-400 mb-4">
+        <div className="text-center py-12 glass-card rounded-xl p-8">
+          <div className="text-neutral-600 dark:text-neutral-300 mb-6">
             No tasks found. Create your first task to get started!
           </div>
-          <Button onClick={() => setIsCreateModalOpen(true)}>
+          <Button onClick={() => setIsCreateModalOpen(true)} className="hover-lift">
             <Plus className="mr-2 h-4 w-4" />
             Create Task
           </Button>
@@ -198,6 +254,7 @@ export function TaskList() {
                           onEdit={openEditModal}
                           onDelete={handleDeleteTask}
                           onToggleStatus={handleToggleStatus}
+                          onToggleSubtask={handleToggleSubtask}
                         />
                       </div>
                     )}

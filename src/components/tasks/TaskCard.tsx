@@ -9,8 +9,11 @@ import {
   Edit, 
   CheckCircle, 
   Circle,
-  AlertCircle
+  AlertCircle,
+  ListChecks
 } from 'lucide-react';
+
+import { SubtaskList } from './SubtaskList';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -45,9 +48,10 @@ interface TaskCardProps {
   onEdit: (task: Task) => void;
   onDelete: (id: string) => void;
   onToggleStatus: (id: string, status: Task['status']) => void;
+  onToggleSubtask: (taskId: string, subtaskIndex: number, completed: boolean) => void;
 }
 
-export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardProps) {
+export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubtask }: TaskCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const getPriorityColor = (priority: Task['priority']) => {
@@ -79,8 +83,8 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardPro
 
   return (
     <Card className={cn(
-      "transition-all duration-200 hover:shadow-md",
-      task.isOverdue && task.status !== 'completed' && "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950",
+      "glass-card transition-all duration-300 hover:shadow-lg pulse-on-hover subtle-enter",
+      task.isOverdue && task.status !== 'completed' && "border-red-200/50 bg-red-50/30 dark:border-red-800/30 dark:bg-red-950/20",
       task.status === 'completed' && "opacity-75"
     )}>
       <CardContent className="p-4">
@@ -89,7 +93,7 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardPro
             <button
               onClick={handleStatusToggle}
               className={cn(
-                "mt-1 transition-colors",
+                "mt-1 transition-all duration-300 transform hover:scale-110",
                 getStatusColor(task.status)
               )}
             >
@@ -103,8 +107,8 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardPro
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2 mb-2">
                 <h3 className={cn(
-                  "font-medium text-gray-900 dark:text-white",
-                  task.status === 'completed' && "line-through text-gray-500"
+                  "font-medium text-neutral-900 dark:text-white",
+                  task.status === 'completed' && "line-through text-neutral-500/80 dark:text-neutral-400/70"
                 )}>
                   {task.title}
                 </h3>
@@ -155,7 +159,7 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardPro
 
                 {task.subtasks.length > 0 && (
                   <div className="flex items-center space-x-1">
-                    <Clock className="h-3 w-3" />
+                    <ListChecks className="h-3 w-3" />
                     <span>
                       {task.subtasks.filter(sub => sub.completed).length}/{task.subtasks.length} subtasks
                     </span>
@@ -164,14 +168,11 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardPro
               </div>
 
               {task.subtasks.length > 0 && (
-                <div className="mt-2">
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                    <div
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${task.completionPercentage}%` }}
-                    />
-                  </div>
-                </div>
+                <SubtaskList
+                  subtasks={task.subtasks}
+                  taskId={task._id}
+                  onToggleSubtask={onToggleSubtask}
+                />
               )}
             </div>
           </div>
@@ -179,18 +180,18 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus }: TaskCardPro
           <div className="flex items-center space-x-1">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => onEdit(task)}>
+              <DropdownMenuContent align="end" className="glass">
+                <DropdownMenuItem onClick={() => onEdit(task)} className="hover:bg-neutral-100 dark:hover:bg-neutral-800/50">
                   <Edit className="mr-2 h-4 w-4" />
                   Edit
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => onDelete(task._id)}
-                  className="text-red-600 focus:text-red-600"
+                  className="text-red-600 focus:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
                 >
                   <Trash2 className="mr-2 h-4 w-4" />
                   Delete

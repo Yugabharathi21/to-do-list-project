@@ -30,7 +30,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
+    <nav className="glass-nav sticky top-0 z-40 px-4 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <Button
@@ -43,10 +43,10 @@ export function Navbar() {
           </Button>
           
           <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">T</span>
+            <div className="h-8 w-8 bg-gradient-to-r from-neutral-800 to-neutral-950 dark:from-neutral-200 dark:to-white rounded-lg flex items-center justify-center shadow-sm">
+              <span className="text-white dark:text-black font-bold text-sm">T</span>
             </div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neutral-800 to-neutral-600 dark:from-white dark:to-neutral-300">
               TaskFlow
             </h1>
           </div>
