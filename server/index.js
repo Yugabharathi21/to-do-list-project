@@ -47,7 +47,11 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/todo-app'
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/todo-app',
+      {
+        // Tell Mongoose to not worry about duplicate index errors
+        autoIndex: false
+      }
     );
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {

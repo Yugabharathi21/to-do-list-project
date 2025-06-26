@@ -60,8 +60,8 @@ const userSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
-// Indexes for better performance
-// email index is already created by the unique: true setting
+// Create only necessary indexes
+// Note: unique: true on the email field already creates an index, so no need to add it again
 userSchema.index({ createdAt: -1 });
 
 // Hash password before saving
