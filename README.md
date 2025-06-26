@@ -97,6 +97,148 @@ This will create a production build of the frontend in the `dist` directory.
 
 ## 🚀 Deployment
 
+### Step-by-Step Deployment Guide
+
+#### 1. Preparing Your Application for Production
+
+Before deploying, ensure your application is properly configured:
+
+1. Update your API URL in the frontend:
+   - Create a `.env` file in the root directory with:
+   ```
+   VITE_API_URL=https://your-render-backend-url.onrender.com/api
+   ```
+   - Make sure your `api.ts` uses this environment variable:
+   ```typescript
+   const api = axios.create({
+     baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+   });
+   ```
+
+2. Update your CORS settings in the backend:
+   ```javascript
+   // server/index.js
+   app.use(cors({
+     origin: process.env.NODE_ENV === 'production' 
+       ? process.env.CLIENT_URL 
+       : 'http://localhost:5173',
+     credentials: true
+   }));
+   ```
+
+#### 2. Backend Deployment on Render
+
+1. **Create a MongoDB Atlas Database**:
+   - Sign up/login at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+   - Create a new cluster (free tier is sufficient)
+   - Create a database user with read/write permissions
+   - Get your connection string by clicking "Connect" > "Connect your application"
+   - Replace `<password>` with your database user's password
+
+2. **Deploy the Backend to Render**:
+   - Sign up/login at [Render](https://render.com/)
+   - Click "New" and select "Web Service"
+   - Connect your GitHub repository
+   - Configure the service:
+     - **Name**: `e-ink-todo-backend` (or your preferred name)
+     - **Environment**: `Node`
+     - **Build Command**: `npm install`
+     - **Start Command**: `node server/index.js`
+     - **Environment Variables**:
+       - `MONGODB_URI`: Your MongoDB Atlas connection string
+       - `JWT_SECRET`: A secure random string for JWT signing
+       - `NODE_ENV`: `production`
+       - `CLIENT_URL`: Your Vercel frontend URL (to be created in next step, can update later)
+       - `PORT`: `10000` (Render will override this, but it's good to set)
+   - Click "Create Web Service"
+
+3. **Verify Backend Deployment**:
+   - Once deployed, Render will provide a URL like `https://e-ink-todo-backend.onrender.com`
+   - Test the health endpoint by visiting `https://e-ink-todo-backend.onrender.com/api/health`
+   - You should see a JSON response with status "OK"
+
+#### 3. Frontend Deployment on Vercel
+
+1. **Prepare Your Frontend**:
+   - Commit any uncommitted changes to your repository
+   - Ensure your repository is pushed to GitHub
+
+2. **Deploy to Vercel**:
+   - Sign up/login at [Vercel](https://vercel.com/)
+   - Click "Add New..." > "Project"
+   - Import your GitHub repository
+   - Configure the project:
+     - **Framework Preset**: `Vite`
+     - **Root Directory**: `./` (if your package.json is in the root)
+     - **Build Command**: `npm run build`
+     - **Output Directory**: `dist`
+     - **Environment Variables**:
+       - `VITE_API_URL`: Your Render backend URL with `/api` (e.g., `https://e-ink-todo-backend.onrender.com/api`)
+   - Click "Deploy"
+
+3. **Update CORS Settings on Backend**:
+   - Go back to your Render dashboard
+   - Find your backend service and click on it
+   - Go to "Environment" and update `CLIENT_URL` to your new Vercel URL (e.g., `https://e-ink-todo.vercel.app`)
+   - Click "Save Changes" and Render will automatically redeploy your backend
+
+#### 4. Verify Full Application Deployment
+
+1. Visit your Vercel URL
+2. Test the application by:
+   - Creating an account
+   - Logging in
+   - Creating and managing tasks
+   - Ensuring all features work correctly
+
+#### 5. CI/CD Setup (Optional)
+
+Both Vercel and Render offer continuous deployment by default:
+
+- **Vercel**: Automatically deploys when you push changes to the main branch
+- **Render**: Automatically deploys when you push changes to the connected branch
+
+To disable automatic deployments:
+- On Vercel: Project Settings > Git > Deploy Hooks > Toggle "Enable Auto Deployments"
+- On Render: Service Settings > Auto-Deploy > Toggle "Suspend Auto-Deploy"
+
+### Troubleshooting Deployment Issues
+
+#### CORS Issues
+If you're experiencing CORS issues:
+1. Double check the `CLIENT_URL` on Render matches your Vercel URL exactly
+2. Ensure your API requests include `/api` in the URL
+3. Check browser console for specific CORS error details
+
+#### MongoDB Connection Issues
+If the backend can't connect to MongoDB:
+1. Verify your MongoDB Atlas connection string
+2. Ensure your MongoDB Atlas IP whitelist includes `0.0.0.0/0` (allows connections from anywhere)
+3. Check if your database user has the correct permissions
+
+#### 404 Errors on Page Refresh
+For client-side routing issues:
+1. Create a `vercel.json` file in your project root:
+   ```json
+   {
+     "routes": [{ "src": "/(.*)", "dest": "/index.html" }]
+   }
+   ```
+2. Commit and push this file to your repository
+3. Redeploy on Vercel
+
+### Production Monitoring (Optional)
+
+Consider setting up monitoring for your deployed application:
+
+1. **Backend Monitoring**: 
+   - Use [Sentry](https://sentry.io) or [LogRocket](https://logrocket.com) for error tracking
+   - Implement logging with a service like [Logtail](https://logtail.com)
+
+2. **Frontend Monitoring**:
+   - Add Google Analytics or [Plausible](https://plausible.io) for user analytics
+   - Implement error boundary components in React
+
 ### Backend Deployment (Render, Heroku, or similar)
 
 1. Create a new web service
