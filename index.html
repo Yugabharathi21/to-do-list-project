@@ -2,12 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Full-Stack MERN To-Do List WebApp</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="E-ink optimized task management application with clean, accessible interface" />
+    <meta name="keywords" content="todo, task management, productivity, e-ink, dark mode" />
+    <meta property="og:title" content="SPiceZ - Task Management" />
+    <meta property="og:description" content="E-ink optimized task management application" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://spicez-to-do.vercel.app/" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>SPiceZ | Task Management</title>
+    <!-- Preconnect to API domain for faster initial API calls -->
+    <link rel="preconnect" href="https://to-do-list-project-b0tu.onrender.com" crossorigin />
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Disable automatic phone number detection on iOS -->
+    <meta name="format-detection" content="telephone=no" />
   </head>
   <body>
     <div id="root"></div>
+    <noscript>You need to enable JavaScript to run this application.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

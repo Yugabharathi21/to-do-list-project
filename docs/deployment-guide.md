@@ -30,7 +30,8 @@ VITE_API_URL=http://localhost:5000/api
 #### For Production
 Create a `.env.production` file in the root directory:
 ```
-VITE_API_URL=https://your-render-backend-url.onrender.com/api
+VITE_API_URL=https://to-do-list-project-b0tu.onrender.com/api
+VITE_APP_ENV=production
 ```
 
 ### 2. Update API Configuration
@@ -222,8 +223,8 @@ app.use((err, req, res, next) => {
 
 7. **Verify Backend Deployment**:
    - Once deployed, note down the service URL provided by Render
-     (e.g., `https://e-ink-todo-backend.onrender.com`)
-   - Test the health endpoint by visiting `https://e-ink-todo-backend.onrender.com/api/health`
+     (e.g., `https://to-do-list-project-b0tu.onrender.com`)
+   - Test the health endpoint by visiting `https://to-do-list-project-b0tu.onrender.com/api/health`
    - You should see a JSON response with status "OK"
 
 ## Frontend Deployment on Vercel

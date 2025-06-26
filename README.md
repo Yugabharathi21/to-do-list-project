@@ -46,6 +46,18 @@ A modern, professional task management application with a beautiful e-ink inspir
 - **Express Rate Limit**: Rate limiting middleware
 - **dotenv**: Environment variable management
 
+## 📚 Documentation
+
+All documentation files are located in the [docs](./docs/) directory:
+
+- [Documentation Index](./docs/README.md) - Overview of all available documentation
+- [Server Setup](./docs/server-setup.md) - Server configuration and setup guide
+- [Frontend Architecture](./docs/frontend-architecture.md) - Frontend structure and components
+- [Deployment Guide](./docs/deployment-guide.md) - General deployment instructions
+- [Production Deployment](./docs/production-deployment.md) - Production-specific deployment steps
+- [GitHub Guide](./docs/github-guide.md) - GitHub workflow and best practices
+- [Mongoose Warning Fix](./docs/mongoose-warning-fix.md) - Solution for Mongoose warning
+
 ## 💻 Getting Started
 
 ### Prerequisites
