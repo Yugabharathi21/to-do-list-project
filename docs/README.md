@@ -15,11 +15,14 @@ This folder contains all documentation for the E-ink Todo List Application.
 
 ### Development Guides
 - [GitHub and Version Control](./github-guide.md) - Best practices for using GitHub and version control
+- [Browser Compatibility](./browser-compatibility.md) - Ensuring compatibility across browsers and devices
 
 ### Troubleshooting
 - [Mongoose Warning Fix](./mongoose-warning-fix.md) - Fix for Mongoose duplicate schema index warning
 - [CORS Error Troubleshooting](./cors-troubleshooting.md) - How to fix CORS errors between frontend and backend
 - [API Troubleshooting](./api-troubleshooting.md) - Resolving common API connection and endpoint issues
+- [CORS Fix Guide](./cors-fix-guide.md) - Specific steps to fix CORS issues in production
+- [JavaScript Error Fix](./javascript-error-fix.md) - Fixing "Cannot read properties of undefined" errors
 
 ## 📝 Documentation Standards
 
