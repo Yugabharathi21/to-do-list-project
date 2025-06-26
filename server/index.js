@@ -31,12 +31,18 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS configuration
+// CORS configuration - Allow all origins with credentials support
+console.log('🌐 CORS: Allowing all origins with credentials');
+console.log('🔧 NODE_ENV:', process.env.NODE_ENV);
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.CLIENT_URL 
-    : 'http://localhost:5173',
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow all origins - useful for development and deployment
+    callback(null, true);
+  },
+  credentials: true, // Allow credentials (cookies, authorization headers)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 // Body parsing middleware
