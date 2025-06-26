@@ -165,6 +165,63 @@ CLIENT_URL=https://e-ink-todo.vercel.app
    - Free Render services sleep after inactivity
    - Set up a ping service (e.g., UptimeRobot) to ping your API every 10 minutes
 
+## Common Deployment Issues and Troubleshooting
+
+### Registration Failures
+
+If you encounter "Registration failed. Please try again" errors:
+
+1. **Backend Connectivity**:
+   - Verify your frontend `VITE_API_URL` correctly points to your Render backend
+   - Check Render logs for connection errors or API failures
+   - Test backend directly with Postman or curl: 
+     ```bash
+     curl -X POST https://your-backend-url.onrender.com/api/auth/register \
+       -H "Content-Type: application/json" \
+       -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
+     ```
+
+2. **CORS Issues**:
+   - Verify `CLIENT_URL` in your backend environment variables matches your Vercel URL exactly
+   - Check browser console for CORS errors
+   - Temporary fix: Update CORS settings in `server/index.js` to allow all origins during testing:
+     ```javascript
+     app.use(cors({
+       origin: '*',
+       credentials: true
+     }));
+     ```
+
+3. **MongoDB Connection**:
+   - Verify MongoDB connection string in Render environment variables
+   - Ensure MongoDB Atlas IP whitelist includes `0.0.0.0/0` for Render's dynamic IPs
+   - Check Render logs for MongoDB connection errors
+
+4. **User Schema Validation**:
+   - If registration data fails validation, check your frontend form values
+   - Common issues: email format, password length, missing required fields
+
+5. **JWT Configuration**:
+   - Verify `JWT_SECRET` is properly set in Render environment variables
+   - Check for JWT generation errors in Render logs
+
+6. **Rate Limiting**:
+   - If you've implemented rate limiting, it might block registration attempts
+   - Check for 429 Too Many Requests errors in browser console
+
+7. **Server Cold Start**:
+   - Free tier Render services sleep after inactivity
+   - First request after sleep may time out
+   - Solution: Wait and try again, or upgrade to paid tier
+
+### Quick Fix Checklist
+
+1. Restart your Render service: Dashboard > Your service > Manual Deploy > Deploy latest commit
+2. Verify environment variables in Render and Vercel
+3. Test API directly with Postman or curl
+4. Clear browser cache and cookies
+5. Try registration in incognito/private browsing mode
+
 ---
 
 For more detailed deployment information, refer to the main [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).
