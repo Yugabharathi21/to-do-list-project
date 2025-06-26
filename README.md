@@ -64,14 +64,28 @@ cd e-ink-todo-app
 
 2. Create environment variables
    
-Create a `.env` file in the server directory with the following variables:
+Create a `.env` file in the **root directory** (copy from `.env.example`):
+```bash
+# Copy the example file
+cp .env.example .env
 ```
+
+Then update the values in `.env`:
+```bash
+# ===== BACKEND CONFIGURATION =====
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 PORT=5000
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
+
+# ===== FRONTEND CONFIGURATION =====
+VITE_API_URL=http://localhost:5000
+VITE_APP_ENV=development
+# ... other variables as needed
 ```
+
+> **Note**: This project uses a unified environment file approach where both frontend (prefixed with `VITE_`) and backend variables are stored in a single `.env` file in the root directory.
 
 ### Installation
 
@@ -267,9 +281,10 @@ Consider setting up monitoring for your deployed application:
 ## 📁 Project Structure
 
 ```
+├── .env.example            # Environment variables example file
+├── .env                    # Environment variables (create from example)
 ├── server/                 # Backend code
 │   ├── index.js            # Server entry point
-│   ├── .env                # Environment variables (create this)
 │   ├── middleware/         # Express middleware
 │   │   └── auth.js         # Authentication middleware
 │   ├── models/             # Mongoose models
