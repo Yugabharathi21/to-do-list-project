@@ -101,10 +101,10 @@ interface NoteState {
 }
 
 interface UIState {
-  currentView: 'tasks' | 'calendar' | 'notes';
+  currentView: 'tasks' | 'calendar' | 'notes' | 'profile';
   sidebarOpen: boolean;
   selectedDate: Date;
-  setCurrentView: (view: 'tasks' | 'calendar' | 'notes') => void;
+  setCurrentView: (view: 'tasks' | 'calendar' | 'notes' | 'profile') => void;
   setSidebarOpen: (open: boolean) => void;
   setSelectedDate: (date: Date) => void;
 }

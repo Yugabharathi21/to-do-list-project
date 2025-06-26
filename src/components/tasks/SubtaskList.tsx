@@ -66,11 +66,15 @@ export function SubtaskList({ subtasks, taskId, onToggleSubtask }: SubtaskListPr
       </button>
       
       {expanded && (
-        <div className="mt-4 ml-5 space-y-3 subtle-enter">
+        <div className="mt-4 ml-5 space-y-4 subtle-enter">
           {subtasks.map((subtask, index) => (
             <div 
               key={subtask._id || index} 
-              className="flex items-center group p-1 -ml-1 rounded-sm hover:bg-background/50 transition-colors duration-200"
+              className={cn(
+                "flex items-center group p-3 rounded-sm transition-all duration-200 transform hover:-translate-y-0.5", 
+                "border border-border/40 bg-background/70 dark:bg-card/70 shadow-sm hover:shadow-md",
+                subtask.completed && "opacity-90"
+              )}
             >
               <button
                 onClick={() => handleToggleSubtask(index, subtask.completed)}
@@ -82,9 +86,9 @@ export function SubtaskList({ subtasks, taskId, onToggleSubtask }: SubtaskListPr
                 )}
               >
                 {subtask.completed ? (
-                  <CheckCircle className={cn("h-4 w-4 mr-3 checkbox-complete text-primary/80")} />
+                  <CheckCircle className={cn("h-4.5 w-4.5 mr-3 checkbox-complete text-green-600 dark:text-green-400")} />
                 ) : (
-                  <Circle className="h-4 w-4 mr-3 text-muted-foreground/70" />
+                  <Circle className="h-4.5 w-4.5 mr-3 text-primary/50 hover:text-primary/80" />
                 )}
                 <span className={cn(
                   "subtask-title",

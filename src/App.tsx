@@ -7,11 +7,12 @@ import { Layout } from '@/components/layout/Layout';
 import { TaskList } from '@/components/tasks/TaskList';
 import { CalendarView } from '@/components/calendar/CalendarView';
 import { NotesList } from '@/components/notes/NotesList';
+import { ProfilePage } from '@/components/profile/ProfilePage';
 import { useAuthStore, useUIStore, useTaskStore } from '@/lib/store';
 import { tasksAPI } from '@/lib/api';
 
 function App() {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   const { currentView } = useUIStore();
   const { setTaskStats } = useTaskStore();
 
@@ -47,6 +48,8 @@ function App() {
         return <CalendarView />;
       case 'notes':
         return <NotesList />;
+      case 'profile':
+        return <ProfilePage />;
       default:
         return <TaskList />;
     }

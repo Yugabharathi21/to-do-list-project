@@ -1,4 +1,4 @@
-import { CheckSquare, Calendar, FileText, BarChart3, X, CheckCircle2 } from 'lucide-react';
+import { CheckSquare, Calendar, FileText, X, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useUIStore, useTaskStore } from '@/lib/store';
@@ -26,13 +26,13 @@ export function Sidebar() {
       icon: FileText,
     },
     {
-      id: 'analytics',
-      label: 'Analytics',
-      icon: BarChart3,
+      id: 'profile',
+      label: 'Profile',
+      icon: User,
     },
   ];
 
-  const handleViewChange = (view: 'tasks' | 'calendar' | 'notes') => {
+  const handleViewChange = (view: 'tasks' | 'calendar' | 'notes' | 'profile') => {
     setCurrentView(view);
     setSidebarOpen(false);
   };
@@ -58,16 +58,6 @@ export function Sidebar() {
         )}
       >
         <div className="px-4 mb-8 flex items-center justify-between">
-          <div className="app-logo">
-            <div className="flex items-center justify-center h-8 w-8 bg-background rounded-sm border border-border/80 shadow-sm">
-              <CheckCircle2 className="h-4 w-4 text-primary" strokeWidth={2.5} />
-            </div>
-            <div>
-              <span className="app-logo-text">
-                <span className="font-display text-primary">E</span>-Tasks
-              </span>
-            </div>
-          </div>
 
           <Button
             variant="ghost"
