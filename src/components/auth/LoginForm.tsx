@@ -56,7 +56,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
   return (
     <div className="space-y-4">
       {error && (
-        <Alert variant="destructive" className="bg-destructive/5 dark:bg-destructive/20 border-destructive/30 text-destructive dark:text-destructive-foreground rounded-sm py-2">
+        <Alert variant="destructive" className="bg-destructive/5 dark:bg-destructive/20 border-destructive/30 text-destructive dark:text-destructive-foreground dark:border-destructive/50 rounded-sm py-2">
           <AlertDescription className="font-body text-sm">{error}</AlertDescription>
         </Alert>
       )}
@@ -75,10 +75,10 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
               autoComplete="email"
               {...register('email')}
               className={cn(
-                "pl-10 h-10 font-body bg-transparent dark:bg-background/50 border-border/60",
-                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30",
-                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-background/80",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.email && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
@@ -101,10 +101,10 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
               autoComplete="current-password"
               {...register('password')}
               className={cn(
-                "pl-10 h-10 pr-10 font-body bg-transparent dark:bg-background/50 border-border/60",
-                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30",
-                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-background/80",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 pr-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.password && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
@@ -126,16 +126,16 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
             <input 
               type="checkbox" 
               id="remember" 
-              className="pro-checkbox h-4 w-4 accent-primary dark:accent-primary/90 cursor-pointer" 
+              className="pro-checkbox h-4 w-4 accent-primary dark:accent-primary/70 cursor-pointer rounded border-gray-400 dark:border-gray-600" 
             />
             <label 
               htmlFor="remember" 
-              className="ml-2 text-sm font-body text-muted-foreground hover:text-foreground cursor-pointer transition-colors duration-200"
+              className="ml-2 text-sm font-body text-muted-foreground hover:text-foreground dark:text-gray-400 dark:hover:text-gray-200 cursor-pointer transition-colors duration-200"
             >
               Remember me
             </label>
           </div>
-          <a href="#" className="text-sm font-body text-primary hover:text-primary/90 dark:hover:text-primary/70 hover:underline transition-colors duration-200">
+          <a href="#" className="text-sm font-body text-primary hover:text-primary/90 dark:text-primary/80 dark:hover:text-primary/60 hover:underline transition-colors duration-200">
             Forgot password?
           </a>
         </div>
@@ -157,13 +157,13 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
       </form>
       
       {/* Sign up link */}
-      <div className="pt-2 text-center border-t border-border/30 mt-6">
-        <p className="text-sm font-body text-muted-foreground">
+      <div className="pt-2 text-center border-t border-border/30 dark:border-border/20 mt-6">
+        <p className="text-sm font-body text-muted-foreground dark:text-gray-400">
           Don't have an account yet?{' '}
           <button
             type="button"
             onClick={onToggleMode}
-            className="text-primary hover:text-primary/80 dark:hover:text-primary/70 hover:underline font-medium transition-colors"
+            className="text-primary hover:text-primary/80 dark:text-primary/80 dark:hover:text-primary/60 hover:underline font-medium transition-colors"
           >
             Sign up
           </button>

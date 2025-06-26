@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { ThemeProvider } from 'next-themes';
-import { Toaster } from 'sonner';
+import { Toaster } from '@/components/ui/sonner';
 
 import { AuthPage } from '@/components/auth/AuthPage';
 import { Layout } from '@/components/layout/Layout';
@@ -35,7 +35,17 @@ function App() {
     return (
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <AuthPage />
-        <Toaster position="top-right" richColors />
+        <Toaster 
+          position="top-right" 
+          richColors 
+          closeButton 
+          expand={false}
+          theme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'}
+          toastOptions={{
+            className: 'custom-toast',
+            duration: 6000,
+          }}
+        />
       </ThemeProvider>
     );
   }
@@ -60,7 +70,17 @@ function App() {
       <Layout>
         {renderCurrentView()}
       </Layout>
-      <Toaster position="top-right" richColors />
+      <Toaster 
+        position="top-right" 
+        richColors 
+        closeButton 
+        expand={false}
+        theme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'}
+        toastOptions={{
+          className: 'custom-toast',
+          duration: 6000,
+        }}
+      />
     </ThemeProvider>
   );
 }

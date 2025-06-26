@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { z                   <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground dark:text-gray-500 dark:hover:text-gray-300 transition-colors focus:outline-none"   <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground dark:text-gray-500 dark:hover:text-gray-300 transition-colors focus:outline-none"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>'zod';
 import { Eye, EyeOff, Loader2, Mail, User, LockIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -82,9 +90,10 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
               autoComplete="name"
               {...register('name')}
               className={cn(
-                "pl-10 h-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.name && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
@@ -107,9 +116,10 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
               autoComplete="email"
               {...register('email')}
               className={cn(
-                "pl-10 h-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.email && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
@@ -132,9 +142,10 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
               autoComplete="new-password"
               {...register('password')}
               className={cn(
-                "pl-10 h-10 pr-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 pr-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.password && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
@@ -164,9 +175,10 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
               autoComplete="new-password"
               {...register('confirmPassword')}
               className={cn(
-                "pl-10 h-10 pr-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 pr-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.confirmPassword && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
@@ -215,13 +227,13 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
       </form>
       
       {/* Sign in link */}
-      <div className="pt-2 text-center border-t border-border/30 mt-6">
-        <p className="text-sm font-body text-muted-foreground">
+      <div className="pt-2 text-center border-t border-border/30 dark:border-border/20 mt-6">
+        <p className="text-sm font-body text-muted-foreground dark:text-gray-400">
           Already have an account?{' '}
           <button
             type="button"
             onClick={onToggleMode}
-            className="text-primary hover:underline font-medium transition-colors"
+            className="text-primary hover:text-primary/80 dark:text-primary/80 dark:hover:text-primary/60 hover:underline font-medium transition-colors"
           >
             Sign in
           </button>
