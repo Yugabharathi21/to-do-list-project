@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Mail, LockIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { authAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -48,93 +48,125 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
       toast.success('Welcome back!');
       
     } catch (error: any) {
-      const message = error.response?.data?.message || 'Login failed. Please try again.';
-      setError(message);
-      toast.error(message);
+      const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials and try again.';
+      setError(errorMessage);
     }
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
-        <CardDescription className="text-center">
-          Enter your email and password to access your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-          
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+    <div className="space-y-4">
+      {error && (
+        <Alert variant="destructive" className="bg-destructive/10 border-destructive/30 text-destructive rounded-sm py-2">
+          <AlertDescription className="font-body text-sm">{error}</AlertDescription>
+        </Alert>
+      )}
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="email" className="text-sm font-medium font-body block text-foreground">
+            Email
+          </Label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               id="email"
               type="email"
-              placeholder="john@example.com"
+              placeholder="your.email@example.com"
+              autoComplete="email"
               {...register('email')}
-              className={errors.email ? 'border-red-500' : ''}
+              className={cn(
+                "pl-10 h-10 font-body bg-background border-border/60",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "rounded-sm transition-all duration-300",
+                errors.email && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
+              )}
             />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
-            )}
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <div className="relative">
-              <Input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter your password"
-                {...register('password')}
-                className={errors.password ? 'border-red-500 pr-10' : 'pr-10'}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
-            )}
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Signing In...
-              </>
-            ) : (
-              'Sign In'
-            )}
-          </Button>
-        </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
-            <button
-              onClick={onToggleMode}
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              Sign Up
-            </button>
-          </p>
+          {errors.email && (
+            <p className="text-destructive text-xs mt-1 font-body">{errors.email.message}</p>
+          )}
         </div>
-      </CardContent>
-    </Card>
+
+        <div className="space-y-2">
+          <Label htmlFor="password" className="text-sm font-medium font-body block text-foreground">
+            Password
+          </Label>
+          <div className="relative">
+            <LockIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="••••••••"
+              autoComplete="current-password"
+              {...register('password')}
+              className={cn(
+                "pl-10 h-10 pr-10 font-body bg-background border-border/60",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "rounded-sm transition-all duration-300",
+                errors.password && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
+              )}
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-destructive text-xs mt-1 font-body">{errors.password.message}</p>
+          )}
+        </div>
+
+        <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <input 
+              type="checkbox" 
+              id="remember" 
+              className="pro-checkbox h-4 w-4" 
+            />
+            <label 
+              htmlFor="remember" 
+              className="ml-2 text-sm font-body text-muted-foreground"
+            >
+              Remember me
+            </label>
+          </div>
+          <a href="#" className="text-sm font-body text-primary hover:underline">
+            Forgot password?
+          </a>
+        </div>
+
+        <Button
+          type="submit"
+          className="w-full h-10 bg-primary hover:bg-primary/90 text-primary-foreground font-body text-sm rounded-sm transition-all duration-300 relative overflow-hidden"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              Signing in...
+            </>
+          ) : (
+            'Sign In'
+          )}
+        </Button>
+      </form>
+      
+      {/* Sign up link */}
+      <div className="pt-2 text-center border-t border-border/30 mt-6">
+        <p className="text-sm font-body text-muted-foreground">
+          Don't have an account yet?{' '}
+          <button
+            type="button"
+            onClick={onToggleMode}
+            className="text-primary hover:underline font-medium transition-colors"
+          >
+            Sign up
+          </button>
+        </p>
+      </div>
+    </div>
   );
 }

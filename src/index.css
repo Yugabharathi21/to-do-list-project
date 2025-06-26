@@ -1,12 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Akira-inspired font */
+@font-face {
+  font-family: 'Akira';
+  src: url('Akira Expanded Demo.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-body);
+  line-height: 1.6;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -15,199 +26,433 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: revert;
-  border: revert;
-  padding: revert;
-  font-size: revert;
-  font-weight: revert;
-  background-color: revert;
-  transition: revert;
-}
-button:hover {
-  border-color: revert;
-}
-button:focus,
-button:focus-visible {
-  outline: revert;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  
+  /* Professional Typography System */
+  --font-heading: 'Space Grotesk', 'Montserrat', system-ui, sans-serif;
+  --font-body: 'DM Sans', 'Roboto', system-ui, sans-serif;
+  --font-display: 'Akira', 'Montserrat', system-ui, sans-serif;
+  --font-serif: 'Bitter', 'Playfair Display', Georgia, serif;
+  --font-mono: 'Space Mono', 'Roboto Mono', monospace;
+  
+  /* Professional spacing system */
+  --spacing-xs: 0.25rem;  /* 4px */
+  --spacing-sm: 0.5rem;   /* 8px */
+  --spacing-md: 1rem;     /* 16px */
+  --spacing-lg: 1.5rem;   /* 24px */
+  --spacing-xl: 2rem;     /* 32px */
+  --spacing-2xl: 2.5rem;  /* 40px */
+  --spacing-3xl: 3rem;    /* 48px */
 }
 
 @layer base {
   :root {
-    /* Crow Light Theme - Elegant Black & White with slight blue undertone */
-    --background: 210 20% 98%; /* Very light blue-gray */
-    --foreground: 220 14% 10%; /* Almost black with slight blue tint */
-    --card: 0 0% 100%;
-    --card-foreground: 220 14% 5%;
+    /* E-ink Professional Light Theme */
+    --background: 30 25% 97%; /* Soft paper white with slight warmth */
+    --foreground: 215 35% 12%; /* Rich dark text with slight blue undertone */
+    --card: 0 0% 100%; /* Pure white card background */
+    --card-foreground: 215 35% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 14% 5%;
-    --primary: 220 14% 10%; /* Pure black for primary elements */
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 5% 92%; /* Very light gray with blue tint */
-    --secondary-foreground: 220 14% 10%;
-    --muted: 220 10% 94%;
-    --muted-foreground: 220 5% 40%;
-    --accent: 230 5% 82%; /* Light gray with slight blue for accents */
-    --accent-foreground: 220 14% 5%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 85%;
-    --input: 220 13% 85%;
-    --ring: 224 16% 12%;
-    --chart-1: 230 20% 20%; /* Minimal monochrome chart colors */
-    --chart-2: 240 10% 40%;
-    --chart-3: 230 10% 60%;
-    --chart-4: 220 5% 80%;
-    --chart-5: 210 10% 90%;
-    --radius: 0.5rem;
+    --popover-foreground: 215 35% 12%;
+    --primary: 215 30% 20%; /* Professional dark blue-gray */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 20% 96%; /* Warm light gray with paper feel */
+    --secondary-foreground: 215 35% 25%;
+    --muted: 30 10% 92%;
+    --muted-foreground: 215 15% 40%;
+    --accent: 215 30% 30%; /* Subtle accent compatible with e-ink */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 65% 45%; /* Muted red for errors */
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 15% 85%;
+    --input: 30 15% 85%;
+    --ring: 215 30% 30%;
+    /* Monochrome chart colors for e-ink feel */
+    --chart-1: 215 30% 25%;
+    --chart-2: 215 25% 40%;
+    --chart-3: 215 20% 55%;
+    --chart-4: 215 15% 70%;
+    --chart-5: 215 10% 85%;
+    --radius: 0.25rem; /* Smaller radius for e-ink look */
   }
+  
   .dark {
-    /* Crow Dark Theme - Deep rich blacks with subtle gradient */
-    --background: 224 16% 6%; /* Rich dark blue-black */
-    --foreground: 220 10% 98%;
-    --card: 224 16% 8%; /* Slightly lighter than background */
-    --card-foreground: 220 10% 98%;
-    --popover: 224 16% 8%;
-    --popover-foreground: 220 10% 98%;
-    --primary: 220 10% 98%; /* Pure white in dark mode */
-    --primary-foreground: 224 16% 6%;
-    --secondary: 215 14% 14%; /* Dark gray with blue tint */
-    --secondary-foreground: 220 10% 98%;
-    --muted: 215 14% 16%;
-    --muted-foreground: 220 5% 65%;
-    --accent: 215 14% 18%; /* Subtle dark accent */
-    --accent-foreground: 220 10% 98%;
-    --destructive: 0 60% 40%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 215 14% 18%;
-    --input: 215 14% 18%;
-    --ring: 220 10% 80%;
-    /* Monochrome chart colors with slight blue tint */
-    --chart-1: 220 10% 90%;
-    --chart-2: 220 8% 70%;
-    --chart-3: 220 6% 50%;
-    --chart-4: 220 4% 30%;
-    --chart-5: 220 2% 10%;
+    /* E-ink Professional Dark Theme */
+    --background: 215 35% 10%; /* Dark paper-like background */
+    --foreground: 30 10% 92%; /* Off-white text for e-ink feel */
+    --card: 215 30% 12%; /* Slightly lighter than background */
+    --card-foreground: 30 10% 92%;
+    --popover: 215 30% 12%;
+    --popover-foreground: 30 10% 92%;
+    --primary: 215 20% 65%; /* Muted blue-gray accent */
+    --primary-foreground: 215 40% 12%;
+    --secondary: 215 25% 16%; /* Subtle secondary background */
+    --secondary-foreground: 30 10% 92%;
+    --muted: 215 25% 18%;
+    --muted-foreground: 30 10% 70%;
+    --accent: 215 20% 60%; /* Subtle accent color */
+    --accent-foreground: 215 40% 12%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 25% 22%;
+    --input: 215 25% 22%;
+    --ring: 215 20% 65%;
+    /* Monochrome chart colors */
+    --chart-1: 215 20% 75%;
+    --chart-2: 215 15% 65%;
+    --chart-3: 215 20% 55%;
+    --chart-4: 215 25% 45%;
+    --chart-5: 215 30% 35%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
+  
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    /* E-ink paper texture background */
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeBlend mode='soft-light' in='SourceGraphic' result='noisy'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 300px 300px;
   }
+  
+  /* Add text-2xs size */
+  .text-2xs {
+    font-size: 0.65rem;
+    line-height: 1rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: -0.03em;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    font-family: var(--font-body);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .font-display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  
+  .font-body {
+    font-family: var(--font-body);
+  }
+  
+  .font-mono {
+    font-family: var(--font-mono);
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Logo Styles */
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.app-logo-icon {
+  font-family: var(--font-display);
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: hsl(var(--primary));
+  letter-spacing: -0.05em;
+}
+
+.app-logo-text {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
+}
+
+.app-logo.small .app-logo-icon {
+  font-size: 1.25rem;
+}
+
+.app-logo.small .app-logo-text {
+  font-size: 1rem;
 }
 
 @layer components {
-  .glass {
-    @apply backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10;
+  /* Modern professional card styles */
+  .pro-card {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border-radius: 0.75rem;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .glass-card {
-    @apply bg-white/80 dark:bg-black/60 backdrop-blur-xl shadow-lg border border-white/20 dark:border-white/5;
+  .pro-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.09);
   }
   
-  .glass-nav {
-    @apply bg-white/70 dark:bg-black/70 backdrop-blur-xl shadow-sm border-b border-white/20 dark:border-white/5;
+  /* Professional button styles */
+  .pro-button {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-family: var(--font-body);
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
   }
   
-  .glass-sidebar {
-    @apply bg-white/60 dark:bg-gray-900/80 backdrop-blur-xl;
+  .pro-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
   }
   
-  /* Apple-inspired subtle animations */
-  .hover-lift {
-    @apply transition-all duration-300 ease-out hover:translate-y-[-3px] hover:shadow-md;
-  }
-  
-  .subtle-enter {
-    @apply opacity-0 translate-y-2;
-    animation: subtleEnter 0.3s ease-out forwards;
-  }
-  
-  .pulse-on-hover {
-    @apply transition-transform duration-300 ease-out hover:scale-[1.02];
-  }
-  
-  /* Panel transition animation */
-  .panel-transition-in {
-    animation: panelSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  
-  .panel-transition-out {
-    animation: panelSlideOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-}
-
-@keyframes subtleEnter {
-  to {
-    opacity: 1;
+  .pro-button:active {
     transform: translateY(0);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
   }
-}
+  
+  /* Professional checkbox style */
+  .pro-checkbox {
+    appearance: none;
+    height: 1.25rem;
+    width: 1.25rem;
+    border: 2px solid hsl(var(--border));
+    border-radius: 0.375rem;
+    background-color: hsl(var(--card));
+    position: relative;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .pro-checkbox:checked {
+    background-color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+  }
+  
+  .pro-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    color: hsl(var(--primary-foreground));
+    font-size: 0.75rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Typography utility classes */
+  .text-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: hsl(var(--foreground));
+  }
+  
+  .text-subtitle {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+    letter-spacing: -0.005em;
+  }
+  
+  .text-body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+  
+  .text-serif {
+    font-family: var(--font-serif);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+  
+  .text-mono {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    letter-spacing: -0.025em;
+  }
+  
+  .text-display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+  }
 
-@keyframes panelSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+  /* Spacious item layout */
+  .item-layout {
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius);
+    transition: background-color 0.2s ease;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .item-layout:hover {
+    background-color: hsl(var(--muted));
   }
-}
-
-@keyframes panelSlideOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
+  
+  /* Task strike-through animation */
+  .task-title {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 500;
   }
-  to {
-    opacity: 0;
-    transform: translateY(8px);
+  
+  .task-title.completed {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .task-title.completed::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: hsl(var(--primary));
+    animation: strikeThrough 0.5s ease-in-out forwards;
+  }
+  
+  /* Subtask title styling */
+  .subtask-title {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+  
+  .subtask-title.completed {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .subtask-title.completed::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: hsl(var(--primary));
+    animation: strikeThrough 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes strikeThrough {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  /* Subtask list specific styles */
+  .subtask-header {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+  
+  .subtask-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+    margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    font-family: var(--font-body);
+  }
+  
+  .subtask-item:hover {
+    background-color: hsl(var(--muted));
+  }
+  
+  /* Progress bar */
+  .progress-bar {
+    height: 0.375rem;
+    border-radius: 999px;
+    overflow: hidden;
+    background-color: hsl(var(--muted));
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    transition: width 0.5s ease, background-color 0.3s ease;
+    border-radius: 999px;
   }
 }
 
 /* Mobile optimization */
 @media (max-width: 640px) {
-  .glass {
-    @apply backdrop-blur-sm bg-white/20 dark:bg-black/30;
+  .pro-card {
+    border-width: 0;
+    box-shadow: none;
+  }
+  
+  .app-logo-text {
+    font-size: 1.125rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
   }
 }

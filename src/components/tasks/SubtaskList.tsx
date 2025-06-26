@@ -33,38 +33,38 @@ export function SubtaskList({ subtasks, taskId, onToggleSubtask }: SubtaskListPr
   const progress = Math.round((completedCount / subtasks.length) * 100);
 
   return (
-    <div className="mt-3 pt-2 border-t border-gray-100 dark:border-gray-700">
+    <div className="mt-4 pt-3 border-t border-border/40">
       <button 
         onClick={toggleExpand}
-        className="w-full flex items-center text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+        className="w-full flex items-center text-xs hover:text-foreground transition-all duration-500 bg-transparent py-2 rounded-sm hover:bg-background"
       >
         {expanded ? (
-          <ChevronDown className="h-3.5 w-3.5 mr-1" />
+          <ChevronDown className="h-3.5 w-3.5 text-foreground" />
         ) : (
-          <ChevronRight className="h-3.5 w-3.5 mr-1" />
+          <ChevronRight className="h-3.5 w-3.5 text-foreground" />
         )}
-        <span className="font-medium">
+        <span className="font-serif font-medium ml-1">
           Subtasks ({completedCount}/{subtasks.length})
         </span>
         
-        <div className="ml-auto flex items-center space-x-2">
-          <div className="w-24 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div className="ml-auto flex items-center space-x-3">
+          <div className="w-20 h-1 bg-muted overflow-hidden">
             <div 
               className={cn(
-                "h-full rounded-full transition-all duration-300",
+                "h-full transition-all duration-700",
                 progress === 100 
-                  ? "bg-green-500 dark:bg-green-600" 
-                  : "bg-blue-500 dark:bg-blue-600"
+                  ? "bg-foreground" 
+                  : "bg-muted-foreground"
               )} 
               style={{ width: `${progress}%` }} 
             />
           </div>
-          <span className="min-w-[2rem] text-right">{progress}%</span>
+          <span className="min-w-[2rem] text-right text-2xs">{progress}%</span>
         </div>
       </button>
       
       {expanded && (
-        <div className="mt-2 ml-4 space-y-1.5 animate-in fade-in-50 duration-150">
+        <div className="mt-3 ml-4 space-y-1.5 subtle-enter">
           {subtasks.map((subtask, index) => (
             <div 
               key={subtask._id || index} 
@@ -73,20 +73,20 @@ export function SubtaskList({ subtasks, taskId, onToggleSubtask }: SubtaskListPr
               <button
                 onClick={() => handleToggleSubtask(index, subtask.completed)}
                 className={cn(
-                  "flex items-center text-xs transition-all duration-300 transform hover:scale-105 group-hover:opacity-100",
+                  "flex items-center w-full text-2xs font-serif transition-all duration-500",
                   subtask.completed 
-                    ? "text-green-600 dark:text-green-500" 
-                    : "text-neutral-400 dark:text-neutral-500 opacity-80"
+                    ? "text-muted-foreground" 
+                    : "text-foreground"
                 )}
               >
                 {subtask.completed ? (
-                  <CheckCircle className="h-3.5 w-3.5 mr-1.5" />
+                  <CheckCircle className={cn("h-3 w-3 mr-2 checkbox-complete")} />
                 ) : (
-                  <Circle className="h-3.5 w-3.5 mr-1.5" />
+                  <Circle className="h-3 w-3 mr-2" />
                 )}
                 <span className={cn(
-                  "text-neutral-700 dark:text-neutral-300",
-                  subtask.completed && "line-through text-neutral-500 dark:text-neutral-500"
+                  "subtask-title",
+                  subtask.completed && "completed"
                 )}>
                   {subtask.title}
                 </span>

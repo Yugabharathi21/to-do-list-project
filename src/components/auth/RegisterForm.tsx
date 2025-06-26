@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Mail, User, LockIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { authAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -48,6 +48,7 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
       setError('');
       
       const { confirmPassword, ...registrationData } = data;
+      
       const response = await authAPI.register(registrationData);
       const { token, user } = response.data;
       
@@ -55,130 +56,177 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
       toast.success('Account created successfully!');
       
     } catch (error: any) {
-      const message = error.response?.data?.message || 'Registration failed. Please try again.';
-      setError(message);
-      toast.error(message);
+      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
+      setError(errorMessage);
     }
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">Sign Up</CardTitle>
-        <CardDescription className="text-center">
-          Create an account to get started with your tasks
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-          
-          <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+    <div className="space-y-4">
+      {error && (
+        <Alert variant="destructive" className="bg-destructive/10 border-destructive/30 text-destructive rounded-sm py-2">
+          <AlertDescription className="font-body text-sm">{error}</AlertDescription>
+        </Alert>
+      )}
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="name" className="text-sm font-medium font-body block text-foreground">
+            Name
+          </Label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               id="name"
-              type="text"
-              placeholder="John Doe"
+              placeholder="Your name"
+              autoComplete="name"
               {...register('name')}
-              className={errors.name ? 'border-red-500' : ''}
+              className={cn(
+                "pl-10 h-10 font-body bg-background border-border/60",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "rounded-sm transition-all duration-300",
+                errors.name && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
+              )}
             />
-            {errors.name && (
-              <p className="text-sm text-red-500">{errors.name.message}</p>
-            )}
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="john@example.com"
-              {...register('email')}
-              className={errors.email ? 'border-red-500' : ''}
-            />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <div className="relative">
-              <Input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter your password"
-                {...register('password')}
-                className={errors.password ? 'border-red-500 pr-10' : 'pr-10'}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <div className="relative">
-              <Input
-                id="confirmPassword"
-                type={showConfirmPassword ? 'text' : 'password'}
-                placeholder="Confirm your password"
-                {...register('confirmPassword')}
-                className={errors.confirmPassword ? 'border-red-500 pr-10' : 'pr-10'}
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              >
-                {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
-            </div>
-            {errors.confirmPassword && (
-              <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
-            )}
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating Account...
-              </>
-            ) : (
-              'Create Account'
-            )}
-          </Button>
-        </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Already have an account?{' '}
-            <button
-              onClick={onToggleMode}
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              Sign In
-            </button>
-          </p>
+          {errors.name && (
+            <p className="text-destructive text-xs mt-1 font-body">{errors.name.message}</p>
+          )}
         </div>
-      </CardContent>
-    </Card>
+
+        <div className="space-y-2">
+          <Label htmlFor="register-email" className="text-sm font-medium font-body block text-foreground">
+            Email
+          </Label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              id="register-email"
+              type="email"
+              placeholder="your.email@example.com"
+              autoComplete="email"
+              {...register('email')}
+              className={cn(
+                "pl-10 h-10 font-body bg-background border-border/60",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "rounded-sm transition-all duration-300",
+                errors.email && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
+              )}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-destructive text-xs mt-1 font-body">{errors.email.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="register-password" className="text-sm font-medium font-body block text-foreground">
+            Password
+          </Label>
+          <div className="relative">
+            <LockIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              id="register-password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="••••••••"
+              autoComplete="new-password"
+              {...register('password')}
+              className={cn(
+                "pl-10 h-10 pr-10 font-body bg-background border-border/60",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "rounded-sm transition-all duration-300",
+                errors.password && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
+              )}
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-destructive text-xs mt-1 font-body">{errors.password.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="confirm-password" className="text-sm font-medium font-body block text-foreground">
+            Confirm Password
+          </Label>
+          <div className="relative">
+            <LockIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              id="confirm-password"
+              type={showConfirmPassword ? 'text' : 'password'}
+              placeholder="••••••••"
+              autoComplete="new-password"
+              {...register('confirmPassword')}
+              className={cn(
+                "pl-10 h-10 pr-10 font-body bg-background border-border/60",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "rounded-sm transition-all duration-300",
+                errors.confirmPassword && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
+              )}
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+          {errors.confirmPassword && (
+            <p className="text-destructive text-xs mt-1 font-body">{errors.confirmPassword.message}</p>
+          )}
+        </div>
+
+        <div className="flex items-center">
+          <input 
+            type="checkbox" 
+            id="terms" 
+            className="pro-checkbox h-4 w-4" 
+            required
+          />
+          <label 
+            htmlFor="terms" 
+            className="ml-2 text-xs font-body text-muted-foreground"
+          >
+            I agree to the <a href="#" className="text-primary hover:underline">Terms of Service</a> and <a href="#" className="text-primary hover:underline">Privacy Policy</a>
+          </label>
+        </div>
+
+        <Button
+          type="submit"
+          className="w-full h-10 bg-primary hover:bg-primary/90 text-primary-foreground font-body text-sm rounded-sm transition-all duration-300 relative overflow-hidden"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              Creating account...
+            </>
+          ) : (
+            'Create Account'
+          )}
+        </Button>
+      </form>
+      
+      {/* Sign in link */}
+      <div className="pt-2 text-center border-t border-border/30 mt-6">
+        <p className="text-sm font-body text-muted-foreground">
+          Already have an account?{' '}
+          <button
+            type="button"
+            onClick={onToggleMode}
+            className="text-primary hover:underline font-medium transition-colors"
+          >
+            Sign in
+          </button>
+        </p>
+      </div>
+    </div>
   );
 }

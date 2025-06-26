@@ -202,13 +202,16 @@ export function TaskList() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between panel-transition-in">
-        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neutral-800 to-neutral-600 dark:from-white dark:to-neutral-300">
+    <div className="space-y-8">
+      <div className="flex items-center justify-between pb-4 border-b border-border/50 panel-transition-in">
+        <h2 className="text-3xl font-serif tracking-tight text-foreground font-medium">
           Tasks
         </h2>
-        <Button onClick={() => setIsCreateModalOpen(true)} className="hover-lift">
-          <Plus className="mr-2 h-4 w-4" />
+        <Button 
+          onClick={() => setIsCreateModalOpen(true)}
+          className="bg-background hover:bg-muted/60 text-foreground border border-border/70 rounded-sm h-10 px-4 font-serif transition-colors duration-500"
+        >
+          <Plus className="mr-2 h-4.5 w-4.5" />
           Add Task
         </Button>
       </div>
@@ -216,11 +219,14 @@ export function TaskList() {
       <TaskFilters />
 
       {tasks.length === 0 ? (
-        <div className="text-center py-12 glass-card rounded-xl p-8">
-          <div className="text-neutral-600 dark:text-neutral-300 mb-6">
+        <div className="text-center py-16 border border-border/50 rounded-sm p-10 bg-background">
+          <div className="text-muted-foreground mb-8 text-lg font-serif">
             No tasks found. Create your first task to get started!
           </div>
-          <Button onClick={() => setIsCreateModalOpen(true)} className="hover-lift">
+          <Button 
+            onClick={() => setIsCreateModalOpen(true)} 
+            className="bg-background hover:bg-muted/60 text-foreground border border-border/70 rounded-sm h-10 px-4 font-serif transition-colors duration-500"
+          >
             <Plus className="mr-2 h-4 w-4" />
             Create Task
           </Button>
@@ -232,7 +238,7 @@ export function TaskList() {
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className="space-y-4"
+                className="space-y-6"
               >
                 {tasks.map((task, index) => (
                   <Draggable
@@ -246,7 +252,7 @@ export function TaskList() {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         className={`transform transition-transform ${
-                          snapshot.isDragging ? 'rotate-2 scale-105' : ''
+                          snapshot.isDragging ? 'rotate-1 scale-102 shadow-lg' : ''
                         }`}
                       >
                         <TaskCard
