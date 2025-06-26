@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Name is required'],
     trim: true,
-    maxlength: [50, 'Name cannot exceed 50 characters']
+    maxlength: [parseInt(process.env.USER_NAME_MAX_LENGTH) || 50, 'Name cannot exceed 50 characters']
   },
   email: {
     type: String,
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
-    minlength: [6, 'Password must be at least 6 characters long'],
+    minlength: [parseInt(process.env.USER_PASSWORD_MIN_LENGTH) || 6, 'Password must be at least 6 characters long'],
     select: false
   },
   avatar: {
@@ -61,7 +61,6 @@ const userSchema = new mongoose.Schema({
 });
 
 // Indexes for better performance
-userSchema.index({ email: 1 });
 userSchema.index({ createdAt: -1 });
 
 // Hash password before saving
@@ -69,7 +68,7 @@ userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   
   try {
-    const salt = await bcrypt.genSalt(12);
+    const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS) || 12);
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {

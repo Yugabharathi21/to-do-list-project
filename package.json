@@ -4,10 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client": "vite",
+    "client:dev": "vite --mode development",
+    "client:build": "vite build --mode production",
     "server": "node server/index.js",
-    "build": "tsc -b && vite build",
+    "server:dev": "node server/index.js",
+    "server:prod": "NODE_ENV=production node server/index.js",
+    "build": "npm run client:build",
+    "start": "npm run server:prod",
     "lint": "eslint .",
     "preview": "vite preview",
     "init-db": "node server/init-db.js"
