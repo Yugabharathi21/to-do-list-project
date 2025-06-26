@@ -104,10 +104,10 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubta
               <div className="flex flex-wrap items-center gap-2 mb-3.5">
                 <Badge className={cn(
                   "px-2 py-0.5 text-xs border rounded-sm font-serif",
-                  task.priority === 'urgent' && "border-destructive/50 text-foreground bg-destructive/5 dark:bg-destructive/10 dark:text-background",
-                  task.priority === 'high' && "border-border/80 text-foreground bg-secondary/30 dark:bg-secondary/30 dark:text-background",
-                  task.priority === 'medium' && "border-border/50 text-foreground bg-secondary/20 dark:bg-secondary/20 dark:text-background",
-                  task.priority === 'low' && "border-border/30 text-foreground bg-secondary/10 dark:bg-secondary/10 dark:text-background"
+                  task.priority === 'urgent' && "border-destructive/50 text-foreground bg-destructive/5 dark:bg-destructive/20 dark:text-primary-foreground",
+                  task.priority === 'high' && "border-border/80 text-foreground bg-secondary/30 dark:bg-primary/40 dark:text-primary-foreground",
+                  task.priority === 'medium' && "border-border/50 text-foreground bg-secondary/20 dark:bg-primary/30 dark:text-primary-foreground",
+                  task.priority === 'low' && "border-border/30 text-foreground bg-secondary/10 dark:bg-primary/20 dark:text-primary-foreground"
                 )}>
                   {task.priority}
                 </Badge>

@@ -75,8 +75,8 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
               autoComplete="email"
               {...register('email')}
               className={cn(
-                "pl-10 h-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "pl-10 h-10 font-body bg-background dark:bg-background/70 border-border/60 dark:border-border/40",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20 dark:focus:ring-primary/30",
                 "rounded-sm transition-all duration-300",
                 errors.email && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
@@ -100,8 +100,8 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
               autoComplete="current-password"
               {...register('password')}
               className={cn(
-                "pl-10 h-10 pr-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
+                "pl-10 h-10 pr-10 font-body bg-background dark:bg-background/70 border-border/60 dark:border-border/40",
+                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20 dark:focus:ring-primary/30",
                 "rounded-sm transition-all duration-300",
                 errors.password && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
@@ -140,7 +140,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
 
         <Button
           type="submit"
-          className="w-full h-10 bg-primary hover:bg-primary/90 text-primary-foreground font-body text-sm rounded-sm transition-all duration-300 relative overflow-hidden"
+          className="w-full h-10 bg-primary hover:bg-primary/90 dark:hover:bg-primary/80 text-primary-foreground font-body text-sm rounded-sm transition-all duration-300 relative overflow-hidden"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

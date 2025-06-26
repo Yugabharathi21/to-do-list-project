@@ -36,7 +36,7 @@ export function SubtaskList({ subtasks, taskId, onToggleSubtask }: SubtaskListPr
     <div className="mt-4 pt-3 border-t border-border/40">
       <button 
         onClick={toggleExpand}
-        className="w-full flex items-center text-xs hover:text-foreground transition-all duration-500 bg-transparent py-2 rounded-sm hover:bg-background"
+        className="w-full flex items-center text-xs hover:text-foreground dark:hover:text-primary-foreground transition-all duration-500 bg-transparent py-2 rounded-sm hover:bg-background dark:hover:bg-background/80"
       >
         {expanded ? (
           <ChevronDown className="h-3.5 w-3.5 text-foreground" />
@@ -75,8 +75,8 @@ export function SubtaskList({ subtasks, taskId, onToggleSubtask }: SubtaskListPr
                 className={cn(
                   "flex items-center w-full text-2xs font-serif transition-all duration-500",
                   subtask.completed 
-                    ? "text-muted-foreground" 
-                    : "text-foreground"
+                    ? "text-muted-foreground dark:text-muted-foreground/70" 
+                    : "text-foreground dark:text-primary-foreground/90"
                 )}
               >
                 {subtask.completed ? (
