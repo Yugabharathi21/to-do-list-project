@@ -233,7 +233,8 @@ app.use((err, req, res, next) => {
 1. **Set Production Environment Variable**:
    - Update your `.env.production` file with your Render backend URL:
    ```
-   VITE_API_URL=https://e-ink-todo-backend.onrender.com/api
+   VITE_API_URL=https://to-do-list-project-b0tu.onrender.com/api
+   VITE_APP_ENV=production
    ```
 
 2. **Push Changes to Your Repository**:
@@ -261,8 +262,9 @@ app.use((err, req, res, next) => {
 
 4. **Add Environment Variables**:
    - Expand the "Environment Variables" section
-   - Add the key-value pair:
-     - `VITE_API_URL`: `https://e-ink-todo-backend.onrender.com/api`
+   - Add the key-value pairs:
+     - `VITE_API_URL`: `https://to-do-list-project-b0tu.onrender.com/api`
+     - `VITE_APP_ENV`: `production`
 
 5. **Deploy the Project**:
    - Click "Deploy"
@@ -270,8 +272,7 @@ app.use((err, req, res, next) => {
    - This process may take a few minutes
 
 6. **Verify Frontend Deployment**:
-   - Once deployed, Vercel will provide a URL for your project
-     (e.g., `https://e-ink-todo.vercel.app`)
+   - Once deployed, your Vercel URL will be: `https://spicez-to-do.vercel.app`
    - Visit the URL to ensure your app loads correctly
 
 ## Post-Deployment Configuration
@@ -283,7 +284,7 @@ Now that your frontend is deployed, update the CORS configuration on your backen
 1. **Go to Render Dashboard**:
    - Find your backend service
    - Click on "Environment"
-   - Update the `CLIENT_URL` variable with your Vercel URL (e.g., `https://e-ink-todo.vercel.app`)
+   - Update the `CLIENT_URL` variable with your Vercel URL: `https://spicez-to-do.vercel.app`
    - Click "Save Changes"
    - Render will automatically redeploy your backend with the new configuration
 

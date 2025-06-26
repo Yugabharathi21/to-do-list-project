@@ -41,17 +41,10 @@ The `.env.production` file contains production-specific environment variables fo
 
 ```bash
 # API URL - Production Render Backend
-VITE_API_URL=https://e-ink-todo-backend.onrender.com/api
+VITE_API_URL=https://to-do-list-project-b0tu.onrender.com/api
 
-# For a secure and optimized production environment
+# Deployment environment
 VITE_APP_ENV=production
-
-# Cache and performance optimization
-VITE_CACHE_TIME=3600000
-
-# Disable development-only features
-VITE_ENABLE_DEVTOOLS=false
-VITE_ENABLE_LOGGING=false
 ```
 
 **Important**: Replace `e-ink-todo-backend.onrender.com` with your actual Render backend URL.
@@ -103,7 +96,7 @@ CLIENT_URL=https://e-ink-todo.vercel.app
 4. **Create Web Service and Deploy**:
    - Click "Create Web Service"
    - Wait for deployment to complete
-   - Note your backend URL (e.g., `https://e-ink-todo-backend.onrender.com`)
+   - Your backend URL should be: `https://to-do-list-project-b0tu.onrender.com`
    - Test the health endpoint: https://e-ink-todo-backend.onrender.com/api/health
 
 ## Frontend Deployment (Vercel)
@@ -128,7 +121,7 @@ CLIENT_URL=https://e-ink-todo.vercel.app
 5. **Deploy**:
    - Click "Deploy"
    - Wait for deployment to complete
-   - Note your frontend URL (e.g., `https://e-ink-todo.vercel.app`)
+   - Your frontend URL should be: `https://spicez-to-do.vercel.app`
 
 ## Post-Deployment Configuration
 
