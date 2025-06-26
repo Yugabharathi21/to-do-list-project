@@ -255,7 +255,7 @@ export function NotesList() {
       />
 
       <NoteForm
-        note={selectedNote}
+        note={selectedNote || undefined}
         open={isEditModalOpen}
         onOpenChange={setIsEditModalOpen}
         onSubmit={handleEditNote}

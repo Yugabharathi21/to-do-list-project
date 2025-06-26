@@ -16,7 +16,7 @@ export function CalendarView() {
   const [monthTasks, setMonthTasks] = useState<any[]>([]);
   const [monthNotes, setMonthNotes] = useState<any[]>([]);
   const [dayDetails, setDayDetails] = useState<{ tasks: any[], notes: any[] }>({ tasks: [], notes: [] });
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   const { setSelectedDate: setGlobalSelectedDate } = useUIStore();
 

@@ -39,6 +39,7 @@ interface Task {
     title: string;
     completed: boolean;
   }>;
+  order: number;
 }
 
 interface TaskCardProps {

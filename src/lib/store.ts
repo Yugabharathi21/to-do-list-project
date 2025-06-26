@@ -147,7 +147,7 @@ export const useAuthStore = create<AuthState>()(
 );
 
 // Task Store
-export const useTaskStore = create<TaskState>((set, get) => ({
+export const useTaskStore = create<TaskState>((set) => ({
   tasks: [],
   selectedTask: null,
   taskStats: {},
@@ -179,7 +179,7 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 }));
 
 // Note Store
-export const useNoteStore = create<NoteState>((set, get) => ({
+export const useNoteStore = create<NoteState>((set) => ({
   notes: [],
   selectedNote: null,
   noteFilters: {

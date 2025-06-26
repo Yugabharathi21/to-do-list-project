@@ -125,9 +125,6 @@ export function TaskList() {
 
       // Calculate new completion percentage
       const completedSubtasks = updatedSubtasks.filter(s => s.completed).length;
-      const completionPercentage = updatedSubtasks.length > 0 
-        ? Math.round((completedSubtasks / updatedSubtasks.length) * 100) 
-        : 0;
 
       // If all subtasks are completed, mark the task as completed as well
       let updatedStatus = task.status;
@@ -281,7 +278,7 @@ export function TaskList() {
       />
 
       <TaskForm
-        task={selectedTask}
+        task={selectedTask || undefined}
         open={isEditModalOpen}
         onOpenChange={setIsEditModalOpen}
         onSubmit={handleEditTask}
