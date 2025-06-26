@@ -1,0 +1,33 @@
+{
+  "id": "59dd0e7b-fab3-49c6-8be3-0963b020c443",
+  "name": "E-ink Todo Environments",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://to-do-list-project-b0tu.onrender.com/api",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "task_id",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "note_id",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2023-06-26T12:00:00.000Z",
+  "_postman_exported_using": "Postman"
+}
