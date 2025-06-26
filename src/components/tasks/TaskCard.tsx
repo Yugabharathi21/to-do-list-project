@@ -62,7 +62,7 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubta
 
   return (
     <Card className={cn(
-      "bg-card border border-border/70 rounded-sm shadow-[0_1px_3px_rgba(0,0,0,0.05)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-all duration-500 subtle-enter",
+      "bg-card border border-border/70 rounded-sm shadow-[0_1px_3px_rgba(0,0,0,0.05)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-all duration-500 subtle-enter hover:shadow-md",
       task.isOverdue && task.status !== 'completed' && "border-destructive/40",
       task.status === 'completed' && "opacity-90 bg-background/80"
     )}>
@@ -73,7 +73,7 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubta
               onClick={handleStatusToggle}
               className={cn(
                 "mt-1.5 transition-all duration-500 opacity-90 hover:opacity-100",
-                task.status === 'completed' ? "text-primary" : "text-muted-foreground"
+                task.status === 'completed' ? "text-green-600 dark:text-green-400" : "text-muted-foreground hover:text-primary/80"
               )}
             >
               {task.status === 'completed' ? (
@@ -82,9 +82,9 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubta
                 <Circle className="h-6 w-6" />
               )}
             </button>              <div className="flex-1 min-w-0">
-              <div className="flex items-center space-x-2 mb-2.5">
+              <div className="flex items-center space-x-2 mb-3">
                 <h3 className={cn(
-                  "font-serif font-medium text-base task-title",
+                  "font-serif font-medium text-lg task-title",
                   task.status === 'completed' && "completed"
                 )}>
                   {task.title}
@@ -103,17 +103,17 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubta
 
               <div className="flex flex-wrap items-center gap-2 mb-3.5">
                 <Badge className={cn(
-                  "px-2 py-0.5 text-xs border rounded-sm font-serif",
-                  task.priority === 'urgent' && "border-destructive/50 text-foreground bg-destructive/5 dark:bg-destructive/20 dark:text-primary-foreground",
-                  task.priority === 'high' && "border-border/80 text-foreground bg-secondary/30 dark:bg-primary/40 dark:text-primary-foreground",
-                  task.priority === 'medium' && "border-border/50 text-foreground bg-secondary/20 dark:bg-primary/30 dark:text-primary-foreground",
-                  task.priority === 'low' && "border-border/30 text-foreground bg-secondary/10 dark:bg-primary/20 dark:text-primary-foreground"
+                  "px-2 py-0.5 text-xs border rounded-sm font-serif font-medium",
+                  task.priority === 'urgent' && "border-red-300 text-red-700 bg-red-50 hover:bg-red-100 dark:border-red-800 dark:bg-red-900/40 dark:text-red-200 dark:hover:bg-red-900/60",
+                  task.priority === 'high' && "border-orange-300 text-orange-700 bg-orange-50 hover:bg-orange-100 dark:border-orange-800 dark:bg-orange-900/40 dark:text-orange-200 dark:hover:bg-orange-900/60",
+                  task.priority === 'medium' && "border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 dark:border-amber-800 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60",
+                  task.priority === 'low' && "border-green-300 text-green-700 bg-green-50 hover:bg-green-100 dark:border-green-800 dark:bg-green-900/40 dark:text-green-200 dark:hover:bg-green-900/60"
                 )}>
                   {task.priority}
                 </Badge>
                 
                 {task.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-xs px-2 py-0.5 border-border/40 bg-background/80 dark:bg-background/40 rounded-sm font-serif">
+                  <Badge key={tag} variant="outline" className="text-xs px-2 py-0.5 border-border/40 bg-background/80 hover:bg-background dark:bg-background/40 dark:hover:bg-background/60 rounded-sm font-serif transition-colors duration-200">
                     <Tag className="h-3 w-3 mr-1 text-primary/70" />
                     {tag}
                   </Badge>
@@ -167,14 +167,14 @@ export function TaskCard({ task, onEdit, onDelete, onToggleStatus, onToggleSubta
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-44 bg-background border border-border/70 rounded-sm p-1 shadow-sm">
-                <DropdownMenuItem onClick={() => onEdit(task)} className="hover:bg-muted/30 py-2 cursor-pointer font-serif text-sm rounded-sm">
-                  <Edit className="mr-2 h-3.5 w-3.5" />
+              <DropdownMenuContent align="end" className="w-44 bg-background border border-border/70 rounded-sm p-1 shadow-md">
+                <DropdownMenuItem onClick={() => onEdit(task)} className="hover:bg-muted/50 py-2 cursor-pointer font-serif text-sm rounded-sm">
+                  <Edit className="mr-2 h-3.5 w-3.5 text-primary/70" />
                   <span>Edit</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => onDelete(task._id)}
-                  className="text-destructive hover:text-destructive focus:text-destructive hover:bg-destructive/5 py-2 cursor-pointer font-serif text-sm rounded-sm"
+                  className="text-destructive hover:text-destructive focus:text-destructive hover:bg-destructive/10 py-2 cursor-pointer font-serif text-sm rounded-sm"
                 >
                   <Trash2 className="mr-2 h-3.5 w-3.5" />
                   <span>Delete</span>

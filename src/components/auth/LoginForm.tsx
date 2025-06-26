@@ -56,7 +56,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
   return (
     <div className="space-y-4">
       {error && (
-        <Alert variant="destructive" className="bg-destructive/10 border-destructive/30 text-destructive rounded-sm py-2">
+        <Alert variant="destructive" className="bg-destructive/5 dark:bg-destructive/20 border-destructive/30 text-destructive dark:text-destructive-foreground rounded-sm py-2">
           <AlertDescription className="font-body text-sm">{error}</AlertDescription>
         </Alert>
       )}
@@ -75,8 +75,9 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
               autoComplete="email"
               {...register('email')}
               className={cn(
-                "pl-10 h-10 font-body bg-background dark:bg-background/70 border-border/60 dark:border-border/40",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20 dark:focus:ring-primary/30",
+                "pl-10 h-10 font-body bg-transparent dark:bg-background/50 border-border/60",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-background/80",
                 "rounded-sm transition-all duration-300",
                 errors.email && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
@@ -100,15 +101,16 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
               autoComplete="current-password"
               {...register('password')}
               className={cn(
-                "pl-10 h-10 pr-10 font-body bg-background dark:bg-background/70 border-border/60 dark:border-border/40",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20 dark:focus:ring-primary/30",
+                "pl-10 h-10 pr-10 font-body bg-transparent dark:bg-background/50 border-border/60",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-background/80",
                 "rounded-sm transition-all duration-300",
                 errors.password && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground dark:hover:text-primary-foreground transition-colors focus:outline-none"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -124,23 +126,23 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
             <input 
               type="checkbox" 
               id="remember" 
-              className="pro-checkbox h-4 w-4" 
+              className="pro-checkbox h-4 w-4 accent-primary dark:accent-primary/90 cursor-pointer" 
             />
             <label 
               htmlFor="remember" 
-              className="ml-2 text-sm font-body text-muted-foreground"
+              className="ml-2 text-sm font-body text-muted-foreground hover:text-foreground cursor-pointer transition-colors duration-200"
             >
               Remember me
             </label>
           </div>
-          <a href="#" className="text-sm font-body text-primary hover:underline">
+          <a href="#" className="text-sm font-body text-primary hover:text-primary/90 dark:hover:text-primary/70 hover:underline transition-colors duration-200">
             Forgot password?
           </a>
         </div>
 
         <Button
           type="submit"
-          className="w-full h-10 bg-primary hover:bg-primary/90 dark:hover:bg-primary/80 text-primary-foreground font-body text-sm rounded-sm transition-all duration-300 relative overflow-hidden"
+          className="w-full h-10 bg-primary hover:bg-primary/80 dark:hover:bg-primary/70 text-primary-foreground font-body text-sm rounded-sm transition-all duration-300 relative overflow-hidden"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -161,7 +163,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
           <button
             type="button"
             onClick={onToggleMode}
-            className="text-primary hover:underline font-medium transition-colors"
+            className="text-primary hover:text-primary/80 dark:hover:text-primary/70 hover:underline font-medium transition-colors"
           >
             Sign up
           </button>

@@ -364,8 +364,9 @@
     display: inline-block;
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: 0.65rem;
-    line-height: 1.2;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
   }
   
   .subtask-title.completed {
@@ -378,7 +379,7 @@
     top: 50%;
     left: 0;
     width: 0;
-    height: 1px;
+    height: 1.5px;
     background-color: hsl(var(--primary));
     animation: strikeThrough 0.5s ease-in-out forwards;
   }

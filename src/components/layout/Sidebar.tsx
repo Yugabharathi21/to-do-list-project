@@ -68,12 +68,12 @@ export function Sidebar() {
               </span>
             </div>
           </div>
-          
+
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setSidebarOpen(false)}
-            className="md:hidden rounded-sm hover:bg-secondary/70"
+            className="md:hidden rounded-sm hover:bg-accent dark:hover:bg-accent/40"
           >
             <X className="h-5 w-5" />
           </Button>
@@ -87,7 +87,7 @@ export function Sidebar() {
               size="sm"
               className={cn(
                 "w-full justify-start rounded-sm h-11 px-4 mb-1 transition-all duration-300",
-                "hover:bg-secondary/70 font-body text-sm",
+                "hover:bg-accent dark:hover:bg-accent/40 font-body text-sm",
                 currentView === item.id
                   ? "bg-secondary/70 text-foreground font-medium"
                   : "text-muted-foreground"
@@ -113,14 +113,14 @@ export function Sidebar() {
         </div>
 
         <div className="mt-8 px-4">
-          <div className="p-3 bg-secondary/30 rounded-sm border border-border/40">
+          <div className="p-3 bg-muted rounded-sm border border-border/40">
             <h4 className="font-heading text-sm font-medium mb-2">Task Progress</h4>
             <div className="text-xs font-body text-muted-foreground mb-2">
               {taskStats.completed || 0} of {(taskStats.pending || 0) + (taskStats.completed || 0)} tasks completed
             </div>
-            <div className="progress-bar">
+            <div className="progress-bar h-2 rounded-sm overflow-hidden bg-border/30">
               <div 
-                className="progress-bar-fill bg-primary" 
+                className="progress-bar-fill bg-primary transition-all duration-300" 
                 style={{ 
                   width: `${taskStats.pending + taskStats.completed > 0 
                     ? (taskStats.completed / (taskStats.pending + taskStats.completed)) * 100 
