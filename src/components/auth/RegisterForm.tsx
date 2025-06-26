@@ -82,9 +82,10 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
               autoComplete="name"
               {...register('name')}
               className={cn(
-                "pl-10 h-10 font-body bg-background border-border/60",
-                "focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
-                "rounded-sm transition-all duration-300",
+                "pl-10 h-10 font-body bg-transparent dark:bg-gray-800/90 border-border/60 dark:border-border/40",
+                "focus:border-primary/70 focus:ring-1 focus:ring-primary/30 dark:focus:ring-primary/50",
+                "hover:border-primary/40 hover:bg-background/60 dark:hover:bg-gray-700/90",
+                "rounded-sm transition-all duration-300 dark:text-gray-200 placeholder:dark:text-gray-500",
                 errors.name && "border-destructive/50 focus:border-destructive/50 focus:ring-destructive/20"
               )}
             />
