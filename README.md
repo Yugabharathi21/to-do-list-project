@@ -219,8 +219,12 @@ To disable automatic deployments:
 #### CORS Issues
 If you're experiencing CORS issues:
 1. Double check the `CLIENT_URL` on Render matches your Vercel URL exactly
-2. Ensure your API requests include `/api` in the URL
+   - Go to the Render dashboard > Your backend service > Environment tab
+   - Update `CLIENT_URL` to `https://spicez-to-do.vercel.app` (no trailing slash)
+   - Click "Save Changes" and wait for the service to redeploy
+2. Ensure your API requests include `/api` in the URL path
 3. Check browser console for specific CORS error details
+4. For detailed steps, see [CORS Troubleshooting Guide](./docs/cors-troubleshooting.md)
 
 #### MongoDB Connection Issues
 If the backend can't connect to MongoDB:

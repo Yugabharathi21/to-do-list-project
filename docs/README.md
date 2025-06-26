@@ -11,12 +11,15 @@ This folder contains all documentation for the E-ink Todo List Application.
 ### Deployment
 - [Comprehensive Deployment Guide](./deployment-guide.md) - Complete guide for deploying the application
 - [Production Deployment](./production-deployment.md) - Specific instructions for production deployment
+- [Vercel Branch Management](./vercel-branch-management.md) - How to manage deployment branches in Vercel
 
 ### Development Guides
 - [GitHub and Version Control](./github-guide.md) - Best practices for using GitHub and version control
 
 ### Troubleshooting
 - [Mongoose Warning Fix](./mongoose-warning-fix.md) - Fix for Mongoose duplicate schema index warning
+- [CORS Error Troubleshooting](./cors-troubleshooting.md) - How to fix CORS errors between frontend and backend
+- [API Troubleshooting](./api-troubleshooting.md) - Resolving common API connection and endpoint issues
 
 ## 📝 Documentation Standards
 
