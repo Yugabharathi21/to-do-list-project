@@ -1,8 +1,31 @@
-# E-ink Inspired Todo List Application
+# SPiceZ To-Do List - E-ink Inspired Todo Application
 
 A modern, professional task management application with a beautiful e-ink inspired design theme. This full-stack MERN (MongoDB, Express, React, Node.js) application provides comprehensive task management capabilities with an emphasis on accessibility, readability, and a clean user interface.
 
-![E-ink Inspired Todo App](https://i.imgur.com/yourscreenshot.png)
+## 🖼️ Preview Images
+
+### Light Mode
+<div align="center">
+  <img src="docs/perview/l1.png" alt="Light Mode - Main Dashboard" width="45%" />
+  <img src="docs/perview/l2.png" alt="Light Mode - Task Management" width="45%" />
+</div>
+<div align="center">
+  <img src="docs/perview/l3.png" alt="Light Mode - Calendar View" width="45%" />
+  <img src="docs/perview/l4.png" alt="Light Mode - Profile" width="45%" />
+</div>
+
+### Dark Mode  
+<div align="center">
+  <img src="docs/perview/d1.png" alt="Dark Mode - Main Dashboard" width="45%" />
+  <img src="docs/perview/d2.png" alt="Dark Mode - Task Management" width="45%" />
+</div>
+<div align="center">
+  <img src="docs/perview/d3.png" alt="Dark Mode - Calendar View" width="45%" />
+  <img src="docs/perview/d4.png" alt="Dark Mode - Notes" width="45%" />
+</div>
+<div align="center">
+  <img src="docs/perview/d5.png" alt="Dark Mode - Authentication" width="45%" />
+</div>
 
 ## 📋 Features
 
@@ -397,4 +420,4 @@ For questions or support, please open an issue on the GitHub repository or conta
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by [Yugabharaathi21]
