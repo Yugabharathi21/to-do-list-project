@@ -12,13 +12,14 @@ dist
 dist-ssr
 *.local
 
-# Environment files (but keep examples)
+# Environment files (but keep examples and templates)
 .env
 .env.local
-.env.production
-.env.development
 .env.unified.production
 !.env.example
+!.env.development
+!.env.production
+.env.production
 
 # Editor directories and files
 .vscode/*

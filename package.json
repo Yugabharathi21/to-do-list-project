@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "dev": "npm run env:dev && concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "prod": "npm run env:prod && concurrently \"npm run server:prod\" \"npm run client:build\"",
     "client": "vite",
     "client:dev": "vite --mode development",
     "client:build": "vite build --mode production",
@@ -15,7 +16,10 @@
     "start": "npm run server:prod",
     "lint": "eslint .",
     "preview": "vite preview",
-    "init-db": "node server/init-db.js"
+    "init-db": "node server/init-db.js",
+    "env:dev": "node switch-env.js development",
+    "env:prod": "node switch-env.js production",
+    "env:switch": "node switch-env.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
